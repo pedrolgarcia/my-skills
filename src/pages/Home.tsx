@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TextInput, Platform, FlatList, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Platform,
+  FlatList,
+  StatusBar,
+} from "react-native";
 
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home() {
   const [newSkill, setNewSkill] = useState("");
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
 
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
-    const currentHour = new Date().getHours()
-    
-    if(currentHour > 4 && currentHour < 12) {
-      setGreeting("Good morning")
-    } else if(currentHour >= 12 && currentHour < 18) {
-      setGreeting("Good afternoon")
+    const currentHour = new Date().getHours();
+
+    if (currentHour > 4 && currentHour < 12) {
+      setGreeting("Good morning");
+    } else if (currentHour >= 12 && currentHour < 18) {
+      setGreeting("Good afternoon");
     } else {
-      setGreeting("Good night")
+      setGreeting("Good night");
     }
-  }, [])
+  }, []);
 
   function handleAddNewSkill() {
-    setMySkills((oldState) => [...oldState, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+
+    setMySkills((oldState) => [...oldState, data]);
   }
 
   return (
@@ -46,10 +64,8 @@ export function Home() {
 
       <FlatList
         data={mySkills}
-        keyExtractor={(item, index) => `skill-${index}`}
-        renderItem={({ item }) => (
-          <SkillCard skill={item} />
-        )}
+        keyExtractor={(item, index) => `skill-${item.id}`}
+        renderItem={({ item }) => <SkillCard skill={item.name} />}
         showsVerticalScrollIndicator={false}
       />
     </View>
@@ -77,6 +93,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   greetings: {
-    color: "#FFF"
-  }
+    color: "#FFF",
+  },
 });
