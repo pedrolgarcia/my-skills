@@ -9,7 +9,7 @@
 
 <p align="center"><b>Capítulo 01: my.skills</b></p>
 
-# gofinances
+# my.skills
 
 ### 💡 Ideia
 
@@ -38,10 +38,10 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/pedrolgarcia/gofinances
+$ git clone https://github.com/pedrolgarcia/my-skills
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd gofinances
+$ cd my-skills
 
 # Instale as dependências
 $ yarn
